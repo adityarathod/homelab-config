@@ -6,7 +6,7 @@ metadata:
 spec:
   interval: 1h
   dependsOn:
-    - name: infra
+    - name: infra-configs
   sourceRef:
     kind: GitRepository
     name: flux-system  # created by flux bootstrap
