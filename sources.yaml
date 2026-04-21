@@ -1,0 +1,12 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: homelab-secrets
+  namespace: flux-system
+spec:
+  interval: 1h
+  url: https://github.com/adityarathod/homelab-secrets
+  ref:
+    branch: main
+  secretRef:
+    name: homelab-secrets-auth  # created manually: flux create secret git homelab-secrets-auth

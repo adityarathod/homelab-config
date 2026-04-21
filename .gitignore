@@ -1,0 +1,8 @@
+# Helm
+charts/
+*.tgz
+
+# SOPS - never commit private keys
+*.age
+age-key.txt
+keys.txt
