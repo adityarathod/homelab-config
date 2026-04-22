@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: whoson
+  namespace: whoson
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: whoson
+  template:
+    metadata:
+      labels:
+        app: whoson
+    spec:
+      containers:
+        - name: whoson
+          image: ghcr.io/adityarathod/whoson/whoson-server:1.0
+          ports:
+            - containerPort: 8080
+          env:
+            - name: R_USER
+              valueFrom:
+                secretKeyRef:
+                  name: whoson-router-creds
+                  key: R_USER
+            - name: R_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: whoson-router-creds
+                  key: R_PASSWORD

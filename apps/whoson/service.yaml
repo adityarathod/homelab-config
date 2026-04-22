@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: whoson
+  namespace: whoson
+  annotations:
+    tailscale.com/hostname: whoson
+spec:
+  loadBalancerClass: tailscale
+  type: LoadBalancer
+  selector:
+    app: whoson
+  ports:
+    - port: 8080
+      targetPort: 8080
