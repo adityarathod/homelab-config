@@ -7,6 +7,7 @@ spec:
   interval: 1h
   dependsOn:
     - name: infra-configs
+    - name: apps-secrets
   sourceRef:
     kind: GitRepository
     name: flux-system  # created by flux bootstrap
