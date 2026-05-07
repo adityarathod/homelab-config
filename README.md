@@ -58,7 +58,10 @@ Each subdirectory is a workload. See `apps/` for descriptions of each.
 1. Create a directory under `apps/` with `namespace.yaml`, `deployment.yaml`, `service.yaml`, and `kustomization.yaml`
 2. Add the directory to `apps/kustomization.yaml`
 
-For tailnet access, set `spec.type: LoadBalancer` and `spec.loadBalancerClass: tailscale` on the Service. The Tailscale operator will provision a MagicDNS name automatically.
+There are two ways to expose an app on the tailnet:
+
+- **HTTP only** — set `spec.type: LoadBalancer` and `spec.loadBalancerClass: tailscale` on the Service. The operator joins a tailnet node that forwards TCP to the Service. Reachable at `http://<service-name>`. Used by `hello-world`.
+- **HTTPS with TLS** — keep the Service as `ClusterIP` and add an `Ingress` with `ingressClassName: tailscale` and `spec.tls.hosts: [<short-name>]` (short hostname only — the operator constructs the FQDN). The operator joins a tailnet node that terminates TLS using a Let's Encrypt cert. Reachable at `https://<short-name>.<tailnet>.ts.net`. Requires HTTPS + MagicDNS enabled in the Tailscale admin console. Used by `whoson`.
 
 ## Companion repos
 
