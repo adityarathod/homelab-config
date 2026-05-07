@@ -3,8 +3,6 @@ kind: Ingress
 metadata:
   name: whoson
   namespace: whoson
-  annotations:
-    tailscale.com/http-endpoint: enabled
 spec:
   ingressClassName: tailscale
   defaultBackend:
